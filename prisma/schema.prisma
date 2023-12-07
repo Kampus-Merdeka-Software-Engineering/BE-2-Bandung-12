@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Int
+  imageUrl  String? // arti ?, not required, kalau pengen dibikin gapapa deh kalau datanya kosong
+  catalogId Int?
+  createdAt DateTime @default(now())
+  // untuk menambahkan relasi dari Product ke Catalog dimana Product boleh gapunya catalog
+  Catalog   Catalog? @relation(fields: [catalogId], references: [id])
+}
+
+model Catalog {
+  id       Int       @id @default(autoincrement())
+  name     String
+  // untuk nambahin relasi antara catalog dengan Product
+  products Product[] // ini artinya Catalog punya banyak product
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String   @db.Text // biar bisa nyimpen pesan dengan karakter yang panjang
+  createdAt DateTime @default(now())
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  number    String
+  message   String   @db.Text // biar bisa nyimpen pesan dengan karakter yang panjang
+  createdAt DateTime @default(now())
+}
+
+model Reserve {
+  id    Int  @id @default(autoincrement())
+  full_name  String
+  email_address String
+  address String
+  check_in   DateTime
+  check_out DateTime
+  type  String
+  rooms String
+  guest    Int
+  name_card  String
+  card_number String
+  cvv String       
+}
+
+model Article {
+  id Int @id @default(autoincrement())
+  type_suite String
+  type_room String
+  description String
+  imageUrl String
+}
