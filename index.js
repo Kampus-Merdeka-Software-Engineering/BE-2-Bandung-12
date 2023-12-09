@@ -1,12 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { catalogRoutes } = require("./routes/catalog.routes");
-const { productRoutes } = require("./routes/product.routes");
-const { messageRoutes } = require("./routes/message.routes");
 const {contactRoutes}  = require("./routes/contact.routes");
 const {reserveRoutes}  = require("./routes/reserve.routes");
-const {articleRoutes}  = require("./routes/article.routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
