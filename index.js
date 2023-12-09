@@ -19,24 +19,15 @@ app.get("/", async (req, res) => {
 	res.send("here is the response");
 });
 
-//article routes
-app.use("/article", articleRoutes)
 
 // contact routes
 app.use("/contact", contactRoutes);
 
 
-// catalog routes
-app.use("/catalogs", catalogRoutes);
 
 // reserve routes
 app.use("/reserve", reserveRoutes);
 
-// messages routes
-app.use("/messages", messageRoutes);
-
-// messages routes
-app.use("/product", productRoutes);
 
 
 app.all("*", async (req, res) => {

@@ -14,8 +14,8 @@ reserveRoutes.post("/", async (req, res) => {
         full_name: req.body.full_name,
         email_address: req.body.email_address,
         address: req.body.address,
-        date_in: checkInDate.toISOString(),
-        date_out: checkOutDate.toISOString(),
+        check_in: checkInDate.toISOString(),
+        check_out: checkOutDate.toISOString(),
         type: req.body.type,
         rooms: req.body.rooms,
         guest: parseInt(req.body.guest),
@@ -36,7 +36,7 @@ reserveRoutes.post("/", async (req, res) => {
 
 
 reserveRoutes.get("/", async (req, res) => {
-    const reservation = await prisma.product.findMany();
+    const reservation = await prisma.reserve.findMany();
     res.status(200).send(reservation);
   });
 
