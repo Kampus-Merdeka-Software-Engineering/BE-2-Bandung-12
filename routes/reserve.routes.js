@@ -32,7 +32,20 @@ reserveRoutes.post("/", async (req, res) => {
   }
 });
 
+reserveRoutes.get("/getAll", async (req, res) => {
+  try {
+    const reservation = await prisma.reserve.findMany();
 
+    if (reservation) {
+      res.status(200).json(reservation);
+    } else {
+      res.status(404).json({ message: "Reservation not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
 reserveRoutes.get("/:id", async (req, res) => {
@@ -53,6 +66,5 @@ reserveRoutes.get("/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
   module.exports ={reserveRoutes}

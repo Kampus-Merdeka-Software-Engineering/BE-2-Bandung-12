@@ -4,19 +4,19 @@ const { prisma } = require("../config/prisma");
 
 // get all message
 contactRoutes.get("/", async (req, res) => {
-	const messages = await prisma.contactus.findMany();
+	const messages = await prisma.contact.findMany();
 	res.status(200).send(messages);
 });
 
 // create new message
 contactRoutes.post("/", async (req, res) => {
-	const { name, email, message, number} = req.body;
-	const newMessage = await prisma.contactus.create({
+	const { name, email, message, phoneNumber} = req.body;
+	const newMessage = await prisma.contact.create({
 		data: {
 			name: name,
 			email: email,
-			message: message,
-            number:number,
+			phoneNumber:parseInt(phoneNumber),
+			message: message,  
 		},
 	});
 	res.status(201).json({
