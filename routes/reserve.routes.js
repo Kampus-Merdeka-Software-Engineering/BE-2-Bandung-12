@@ -32,7 +32,7 @@ reserveRoutes.post("/", async (req, res) => {
   }
 });
 
-reserveRoutes.get("/getAll", async (req, res) => {
+reserveRoutes.get("/", async (req, res) => {
   try {
     const reservation = await prisma.reserve.findMany();
 
