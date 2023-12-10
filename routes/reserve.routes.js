@@ -32,19 +32,27 @@ reserveRoutes.post("/", async (req, res) => {
   }
 });
 
+reserveRoutes.get("/getAll", async (req, res) => {
+  try {
+    const reservation = await prisma.reserve.findMany();
+
+    if (reservation) {
+      res.status(200).json(reservation);
+    } else {
+      res.status(404).json({ message: "Reservation not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 
-
-reserveRoutes.get("/", async (req, res) => {
+reserveRoutes.get("/:id", async (req, res) => {
   try {
     const reservation = await prisma.reserve.findFirst({
       where: {
-        full_name: req.body.full_name,
-        // check_in: checkInDate.toISOString(),
-        // check_out: checkOutDate.toISOString(),
-        type: req.body.type,
-        rooms: req.body.rooms,
-        guest: parseInt(req.body.guest),
+        id:parseInt(req.params.id)
       },
     });
 
@@ -58,6 +66,5 @@ reserveRoutes.get("/", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
   module.exports ={reserveRoutes}

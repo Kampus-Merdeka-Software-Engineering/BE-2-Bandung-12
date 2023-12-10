@@ -4,8 +4,8 @@
   "description": "capstone project by icanq made using express prisma and mysql",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "start": "npx prisma generate && node index.js"
   },
   "keywords": [
     "express",
