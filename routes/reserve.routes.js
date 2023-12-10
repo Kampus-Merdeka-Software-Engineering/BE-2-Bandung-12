@@ -35,16 +35,11 @@ reserveRoutes.post("/", async (req, res) => {
 
 
 
-reserveRoutes.get("/", async (req, res) => {
+reserveRoutes.get("/:id", async (req, res) => {
   try {
     const reservation = await prisma.reserve.findFirst({
       where: {
-        full_name: req.body.full_name,
-        // check_in: checkInDate.toISOString(),
-        // check_out: checkOutDate.toISOString(),
-        type: req.body.type,
-        rooms: req.body.rooms,
-        guest: parseInt(req.body.guest),
+        id:parseInt(req.params.id)
       },
     });
 
