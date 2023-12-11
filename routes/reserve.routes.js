@@ -48,45 +48,5 @@ reserveRoutes.get("/", async (req, res) => {
 });
 
 
-// reserveRoutes.get("/:id", async (req, res) => {
-//   try {
-//     const reservation = await prisma.reserve.findFirst({
-//       where: {
-//         id:parseInt(req.params.id)
-//       },
-//     });
-
-//     if (reservation) {
-//       res.status(200).json(reservation);
-//     } else {
-//       res.status(404).json({ message: "Reservation not found" });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
-// Assuming you have a Prisma model named 'reserve'
-reserveRoutes.get("/latest", async (req, res) => {
-  try {
-    const latestReservation = await prisma.reserve.findFirst({
-      orderBy: {
-        id: 'desc', // Order by ID in descending order to get the latest reservation
-      },
-    });
-
-  if (!latestReservation) {
-      return res.status(404).json({ error: 'Latest reservation not found' });
-    }
-
-    res.status(200).json(latestReservation);
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-
 
   module.exports ={reserveRoutes}
