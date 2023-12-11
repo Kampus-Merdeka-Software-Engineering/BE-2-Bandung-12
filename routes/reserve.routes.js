@@ -67,4 +67,26 @@ reserveRoutes.get("/:id", async (req, res) => {
   }
 });
 
+// Assuming you have a Prisma model named 'reserve'
+reserveRoutes.get("/latest", async (req, res) => {
+  try {
+    const latestReservation = await prisma.reserve.findFirst({
+      orderBy: {
+        id: 'desc', // Order by ID in descending order to get the latest reservation
+      },
+    });
+
+  if (!latestReservation) {
+      return res.status(404).json({ error: 'Latest reservation not found' });
+    }
+
+    res.status(200).json(latestReservation);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
   module.exports ={reserveRoutes}
