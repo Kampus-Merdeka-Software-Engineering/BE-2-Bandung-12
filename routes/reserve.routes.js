@@ -48,24 +48,24 @@ reserveRoutes.get("/", async (req, res) => {
 });
 
 
-reserveRoutes.get("/:id", async (req, res) => {
-  try {
-    const reservation = await prisma.reserve.findFirst({
-      where: {
-        id:parseInt(req.params.id)
-      },
-    });
+// reserveRoutes.get("/:id", async (req, res) => {
+//   try {
+//     const reservation = await prisma.reserve.findFirst({
+//       where: {
+//         id:parseInt(req.params.id)
+//       },
+//     });
 
-    if (reservation) {
-      res.status(200).json(reservation);
-    } else {
-      res.status(404).json({ message: "Reservation not found" });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+//     if (reservation) {
+//       res.status(200).json(reservation);
+//     } else {
+//       res.status(404).json({ message: "Reservation not found" });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 // Assuming you have a Prisma model named 'reserve'
 reserveRoutes.get("/latest", async (req, res) => {
